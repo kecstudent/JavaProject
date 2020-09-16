@@ -200,16 +200,16 @@ System.out.println("Connection failed:"+e1);
 try
 {
 st=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-rs=st.executeQuery("select * from Reservation");
+rs=st.executeQuery("select * from reservation");
 rs.last();
 x=rs.getInt(1);
 Passenger P=new Passenger(x);
 st=con.createStatement();
-rs=st.executeQuery("select * from PassengerID");
+rs=st.executeQuery("select * from passengerid");
 rs.next();
 x=rs.getInt(1);
 P.t1.setText(String.valueOf(x));
-ps=con.prepareStatement("update PassengerID set PID=? where PID=?");
+ps=con.prepareStatement("update passengerid set PID=? where PID=?");
 ps.setInt(1,(x+1));
 ps.setInt(2,x);
 ps.executeUpdate();

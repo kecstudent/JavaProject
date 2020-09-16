@@ -44,7 +44,7 @@ ta=new JTextArea(5,10);
 ta.setBounds(150,170,130,70);
 l5=new JLabel("Address");
 l5.setBounds(50,170,100,30);
-l6=new JLabel("Catagory");
+l6=new JLabel("Category");
 l6.setBounds(50,240,100,30);
 b1=new JButton("More");
 b1.setBackground(Color.yellow);
