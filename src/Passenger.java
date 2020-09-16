@@ -14,10 +14,10 @@ JTextArea ta;
 PreparedStatement ps;
 Statement st;
 ResultSet rs;
-int pno;
+String pno;
 JLabel imgL;
 ImageIcon img;
-Passenger(int p)
+Passenger(String p)
 {
 pno=p;
 img=new ImageIcon("LOGO2.jpg");
@@ -104,7 +104,7 @@ try
 {
 //saving existing record
 String cat="";
-ps=con.prepareStatement("insert into TempPassenger values(?,?,?,?,?,?,?)");
+ps=con.prepareStatement("insert into temppassenger values(?,?,?,?,?,?,?)");
 ps.setString(1,t1.getText());
 ps.setString(2,t2.getText());
 ps.setString(3,t3.getText());
@@ -117,28 +117,28 @@ cat+=c4.getLabel()+",";
 if(c5.getState())
 cat+=c5.getLabel()+",";
 ps.setString(6,cat);
-ps.setInt(7,pno);
+ps.setString(7,pno);
 ps.executeUpdate();
 ps.close();
 
 //opening new form
 Passenger P=new Passenger(pno);
 st=con.createStatement();
-rs=st.executeQuery("select * from PassengerID");
+rs=st.executeQuery("select * from passengerid");
 rs.next();
-int x=rs.getInt(1);
+String x=rs.getString(1);
 P.t1.setText(String.valueOf(x));
 st.close();
 //update passenger id
-ps=con.prepareStatement("update PassengerID set PID=? where PID=?");
-ps.setInt(1,(x+1));
-ps.setInt(2,x);
+ps=con.prepareStatement("update passengerid set PID=? where PID=?");
+ps.setString(1, String.valueOf((Integer.parseInt(x)+1)));
+ps.setString(2,x);
 ps.executeUpdate();
 ps.close();
 }
 catch(Exception e1)
 {
-System.out.println("Connection failed:"+e1);
+System.out.println("Line 141:"+e1);
 }
 }
 if(e.getSource()==b2)
@@ -147,7 +147,7 @@ if(e.getSource()==b2)
 try
 {
 String cat="";
-ps=con.prepareStatement("insert into TempPassenger values(?,?,?,?,?,?,?)");
+ps=con.prepareStatement("insert into temppassenger values(?,?,?,?,?,?,?)");
 ps.setString(1,t1.getText());
 ps.setString(2,t2.getText());
 ps.setString(3,t3.getText());
@@ -160,15 +160,15 @@ cat+=c4.getLabel()+",";
 if(c5.getState())
 cat+=c5.getLabel()+",";
 ps.setString(6,cat);
-ps.setInt(7,pno);
+ps.setString(7,pno);
 ps.executeUpdate();
 ps.close();
 
 st=con.createStatement();
-rs=st.executeQuery("select * from TempPassenger");
+rs=st.executeQuery("select * from temppassenger");
 while(rs.next())
 {
-ps=con.prepareStatement("insert into Passenger values(?,?,?,?,?,?,?)");
+ps=con.prepareStatement("insert into passenger values(?,?,?,?,?,?,?)");
 ps.setString(1,rs.getString(1));
 ps.setString(2,rs.getString(2));
 ps.setString(3,rs.getString(3));
@@ -180,7 +180,7 @@ ps.executeUpdate();
 ps.close();
 }
 st=con.createStatement();
-st.executeUpdate("delete from TempPassenger");
+st.executeUpdate("delete from temppassenger");
 JOptionPane.showMessageDialog(null,"Record Saved");
 b2.setEnabled(false);
 b1.setEnabled(false);
@@ -188,7 +188,7 @@ st.close();
 }
 catch(Exception e1)
 {
-System.out.println("Connection failed:"+e1);
+System.out.println("Line 191:"+e1);
 }
 }
 
@@ -200,6 +200,6 @@ new Reservation();
 }
 public static void main(String args[])
 {
-new Passenger(0);
+new Passenger("0");
 }
 }

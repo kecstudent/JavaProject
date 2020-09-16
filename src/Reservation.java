@@ -13,7 +13,7 @@ JButton b1,b2,b3;
 PreparedStatement ps;
 Statement st;
 ResultSet rs;
-int x;
+String x;
 JLabel imgL;
 ImageIcon img;
 void disable()
@@ -155,9 +155,9 @@ b1.setEnabled(false);
 try
 {
 st=con.createStatement();
-rs=st.executeQuery("select * from PNR");
+rs=st.executeQuery("select * from pnr");
 rs.next();
-x=rs.getInt(1);
+x=rs.getString(1);
 t1.setText(String.valueOf(x));
 
 }
@@ -170,7 +170,7 @@ if(e.getSource()==b2)
 {
 try
 {
-ps=con.prepareStatement("insert into Reservation values(?,?,?,?,?,?,?,?)");
+ps=con.prepareStatement("insert into reservation values(?,?,?,?,?,?,?,?)");
 ps.setString(1,t1.getText());
 ps.setString(2,t2.getText());
 ps.setString(3,t3.getText());
@@ -183,9 +183,9 @@ ps.executeUpdate();
 
 
 //update PNR no.
-ps=con.prepareStatement("update PNR set PNR_No=? where PNR_No=?");
-ps.setInt(1,(x+1));
-ps.setInt(2,x);
+ps=con.prepareStatement("update pnr set PNR_No=? where PNR_No=?");
+ps.setString(1, String.valueOf((Integer.parseInt(x)+1)));
+ps.setString(2,x);
 ps.executeUpdate();
 JOptionPane.showMessageDialog(null, "Record Saved");
 
@@ -202,16 +202,16 @@ try
 st=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 rs=st.executeQuery("select * from reservation");
 rs.last();
-x=rs.getInt(1);
+x=rs.getString(1);
 Passenger P=new Passenger(x);
 st=con.createStatement();
 rs=st.executeQuery("select * from passengerid");
 rs.next();
-x=rs.getInt(1);
+x=rs.getString(1);
 P.t1.setText(String.valueOf(x));
 ps=con.prepareStatement("update passengerid set PID=? where PID=?");
-ps.setInt(1,(x+1));
-ps.setInt(2,x);
+ps.setString(1, String.valueOf((Integer.parseInt(x)+1)));
+ps.setString(2,x);
 ps.executeUpdate();
 }
 catch(Exception e1)
