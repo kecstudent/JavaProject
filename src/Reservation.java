@@ -42,7 +42,7 @@ b2.setEnabled(true);
 }
 Reservation()
 {
-img=new ImageIcon("LOGO1.jpg");
+img=new ImageIcon("LOGO1.bmp");
 imgL=new JLabel(img);
 imgL.setBounds(0,320,500,250);
 f=new JFrame("Reservation");

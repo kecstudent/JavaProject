@@ -12,7 +12,7 @@ JLabel imgL;
 ImageIcon img;
 Main()
 {
-img=new ImageIcon("Indian-Railway-Network.jpg");
+img=new ImageIcon("Indian-Railway-network.jpg");
 imgL=new JLabel(img);
 imgL.setBounds(0,0,1300,1000);
 f=new JFrame("Main");
