@@ -1,79 +1,113 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 class Main implements ActionListener
 {
 JFrame f;
-JButton b1,b2,b3,b4;
 Reservation r;
 Enquiry q;
 Cancellation c;
-JLabel imgL;
+JLabel imgL,mailL;
 ImageIcon img;
+JMenuBar mb;
+JMenu m1,m2,m3;
+JMenuItem i1,i2,i3,i4,i5;
+String mail="contact@irctc.co.in";
+
 Main()
 {
-img=new ImageIcon("Indian-Railway-network.jpg");
+mailL=new JLabel(mail);
+mailL.setForeground(Color.BLUE.darker());
+mailL.setCursor(new Cursor(Cursor.HAND_CURSOR));
+img=new ImageIcon(getClass().getResource("./images/indian-railways.jpg"));
 imgL=new JLabel(img);
-imgL.setBounds(0,0,1300,1000);
-f=new JFrame("Main");
+imgL.setBounds(0,0,700,600);
+f=new JFrame("Dashboard");
 f.getContentPane().setLayout(null);
-f.getContentPane().setBackground(Color.green);
-b1=new JButton("Reservation Form");
-b1.addActionListener(this);
-b1.setBounds(150,390,210,60);
-b2=new JButton("PNR-enquiry");
-b2.addActionListener(this);
-b2.setBounds(150,490,210,60);
-b3=new JButton("Cancellation Form");
-b3.addActionListener(this);
-b3.setBounds(580,390,210,60);
-b4=new JButton("Exit");
-b4.addActionListener(this);
-b4.setBounds(580,490,210,60);
+//f.getContentPane().setBackground(Color.white);
 
-b1.setBackground(new Color(100,200,0));
-b1.setForeground(new Color(255,255,255));
-b2.setBackground(new Color(100,200,0));
-b2.setForeground(new Color(255,255,255));
-b3.setBackground(new Color(100,200,0));
-b3.setForeground(new Color(255,255,255));
-b4.setBackground(new Color(100,200,0));
-b4.setForeground(new Color(255,255,255));
+i1=new JMenuItem("Reservation Form");
+i1.addActionListener(this);
 
-b1.setMnemonic('R');
-b2.setMnemonic('P');
-b3.setMnemonic('C');
-b4.setMnemonic('E');
+i2=new JMenuItem("PNR-enquiry");
+i2.addActionListener(this);
 
-f.getContentPane().add(b1);
-f.getContentPane().add(b2);
-f.getContentPane().add(b3);
-f.getContentPane().add(b4);
+i3=new JMenuItem("Cancellation Form");
+i3.addActionListener(this);
+
+i4=new JMenuItem("Exit");
+i4.addActionListener(this);
+
+i5=new JMenuItem("About Us");
+i5.addActionListener(this);
+
+m1=new JMenu("Booking");
+m2=new JMenu("Cancellation");
+m3=new JMenu("Exit");
+
+m1.add(i1);m1.add(i2);
+m2.add(i3);m2.add(i5);
+m3.add(i4);
+    mb=new JMenuBar();
+mb.add(m1);mb.add(m2);mb.add(m3);
+
+f.setJMenuBar(mb);
+
+
+i1.setMnemonic('R');
+i2.setMnemonic('P');
+i3.setMnemonic('C');
+i4.setMnemonic('E');
+i5.setMnemonic('A');
+
 f.getContentPane().add(imgL);
-f.setSize(1300,1000);
+f.setSize(700,600);
+f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+f.setResizable(false);
 f.setVisible(true);
 }
 public void actionPerformed(ActionEvent e)
 {
-if(e.getSource()==b1)
+if(e.getSource()==i1)
 {
 f.setVisible(false);
 r=new Reservation();
 }
-if(e.getSource()==b2)
+if(e.getSource()==i2)
 {
 f.setVisible(false);
 q=new Enquiry();
 }
-if(e.getSource()==b3)
+if(e.getSource()==i3)
 {
 f.setVisible(false);
 c=new Cancellation();
 }
-if(e.getSource()==b4)
+if(e.getSource()==i4)
 {
 f.setVisible(false);
 System.exit(0);
+}
+if(e.getSource()==i5)
+{
+    mailL.addMouseListener(new MouseAdapter() {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            try {
+                Desktop.getDesktop().browse(new URI("mailto:contact@irctc.co.in"));
+            } catch (IOException | URISyntaxException e1) {
+                e1.printStackTrace();
+            }
+        }
+    });
+    JOptionPane.showMessageDialog(f,mailL,"Contact Mail",
+            JOptionPane.INFORMATION_MESSAGE);
 }
 }
 public static void main(String args[])

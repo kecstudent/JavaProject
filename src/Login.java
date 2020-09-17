@@ -13,13 +13,13 @@ Login()
 {
 f=new JFrame("Login");
 f.getContentPane().setLayout(null);
-f.getContentPane().setBackground(Color.pink);
-l1=new JLabel("User Name");
+f.getContentPane().setBackground(Color.black);
+l1=new JLabel("User Name:");
 l1.setForeground(Color.yellow);
 l1.setBounds(50,50,100,30);
-l2=new JLabel("Password");
+l2=new JLabel("Password:");
 l2.setForeground(Color.yellow);
-l2.setBounds(50,80,100,30);
+l2.setBounds(50,100,100,30);
 t1=new JTextField(10);
 t1.setForeground(Color.blue);
 t1.addActionListener(this);
@@ -28,17 +28,17 @@ t2=new JPasswordField(10);
 t2.setForeground(Color.blue);
 t2.setEchoChar('*');
 t2.addActionListener(this);
-t2.setBounds(150,80,100,30);
-b1=new JButton("Ok");
+t2.setBounds(150,100,100,30);
+b1=new JButton("Login");
 b1.setForeground(Color.blue);
 b1.addActionListener(this);
-b1.setBounds(50,120,100,30);
+b1.setBounds(50,180,100,30);
 b2=new JButton("Cancel");
 b2.setForeground(Color.blue);
 b2.addActionListener(this);
-b2.setBounds(180,120,100,30);
+b2.setBounds(180,180,100,30);
 
-b1.setMnemonic('O');
+b1.setMnemonic('L');
 b2.setMnemonic('C');
 
 f.getContentPane().add(l1);
@@ -47,8 +47,9 @@ f.getContentPane().add(t1);
 f.getContentPane().add(t2);
 f.getContentPane().add(b1);
 f.getContentPane().add(b2);
-f.setBounds(300,300,300,200);
+f.setBounds(300,300,350,300);
 f.setResizable(false);
+f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 f.setVisible(true);
 }
 public void actionPerformed(ActionEvent e)
@@ -59,9 +60,10 @@ if(t1.getText().length()==0||t2.getText().length()==0)
 {
 JOptionPane.showMessageDialog(null,"Fields are empty");
 }
-else if(t1.getText().equals("user") && t2.getText().equals("user"))
+else if(t1.getText().equals("admin") && t2.getText().equals("user"))
 {
 f.setVisible(false);
+
 M=new Main();
 }
 else
