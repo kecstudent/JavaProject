@@ -42,7 +42,7 @@ b2.setEnabled(true);
 }
 Reservation()
 {
-img=new ImageIcon("LOGO1.bmp");
+    img=new ImageIcon(getClass().getResource("./images/irctc.jpg"));
 imgL=new JLabel(img);
 imgL.setBounds(0,320,500,250);
 f=new JFrame("Reservation");
@@ -66,6 +66,7 @@ l8=new JLabel("Boarding at");
 l8.setBounds(50,230,100,30);
 t1=new JTextField(10);
 t1.setBounds(230,50,120,30);
+t1.setEditable(false);
 t2=new JTextField(10);
 t2.addFocusListener(this);
 t2.setBounds(150,80,100,30);
@@ -83,10 +84,11 @@ h=new Choice();
 h.setBounds(150,140,100,30);
 h.add("AC");
 h.add("SL");
-b1=new JButton("Insert");
-b1.setBackground(Color.yellow);
-b1.setBounds(50,270,100,30);
-b1.addActionListener(this);
+h.add("B");
+//b1=new JButton("Initiate");
+//b1.setBackground(Color.yellow);
+//b1.setBounds(50,270,100,30);
+//b1.addActionListener(this);
 b2=new JButton("Next");
 b2.setBackground(Color.yellow);
 b2.setBounds(160,270,100,30);
@@ -96,7 +98,7 @@ b3.setBackground(Color.yellow);
 b3.setBounds(270,270,100,30);
 b3.addActionListener(this);
 
-b1.setMnemonic('I');
+//b1.setMnemonic('I');
 b2.setMnemonic('N');
 b3.setMnemonic('M');
 
@@ -116,13 +118,27 @@ f.getContentPane().add(t5);
 f.getContentPane().add(t6);
 f.getContentPane().add(t7);
 f.getContentPane().add(h);
-f.getContentPane().add(b1);
+//f.getContentPane().add(b1);
 f.getContentPane().add(b2);
 f.getContentPane().add(b3);
 f.getContentPane().add(imgL);
+
+try
+{
+    st=con.createStatement();
+    rs=st.executeQuery("select * from pnr");
+    rs.next();
+    x=rs.getString(1);
+    t1.setText(String.valueOf(x));
+
+}
+catch(Exception e1)
+{
+    System.out.println("Connection failed:"+e1);
+}
 f.setSize(1300,1000);
 f.setVisible(true);
-disable();
+
 }
 public void focusLost(FocusEvent e)
 {
@@ -148,24 +164,7 @@ public void focusGained(FocusEvent e)
 {}
 public void actionPerformed(ActionEvent e)
 {
-if(e.getSource()==b1)
-{
-enable();
-b1.setEnabled(false);
-try
-{
-st=con.createStatement();
-rs=st.executeQuery("select * from pnr");
-rs.next();
-x=rs.getString(1);
-t1.setText(String.valueOf(x));
 
-}
-catch(Exception e1)
-{
-System.out.println("Connection failed:"+e1);
-}
-}
 if(e.getSource()==b2)
 {
 try
