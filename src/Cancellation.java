@@ -56,6 +56,7 @@ h=new Choice();
 h.setBounds(230,50,140,30);
 h.addItemListener(this);
 t1=new JTextField(10);
+
 t1.addActionListener(this);
 t1.setBounds(150,90,100,30);
 t2=new JTextField(10);
@@ -76,8 +77,16 @@ t6.setBounds(300,210,100,30);
 t7=new JTextField(10);
 t7.addActionListener(this);
 t7.setBounds(150,240,100,30);
+t1.setEditable(false);
+t2.setEditable(false);
+t3.setEditable(false);
+t4.setEditable(false);
+t5.setEditable(false);
+t6.setEditable(false);
+t7.setEditable(false);
 li=new List(5,true);
 li.setBounds(80,320,320,100);
+h.add("Select PNR");
 f.getContentPane().add(l1);
 f.getContentPane().add(l2);
 f.getContentPane().add(l3);
@@ -109,7 +118,7 @@ public void start()
 try
 {
 st=con.createStatement();
-rs=st.executeQuery("select * from Reservation");
+rs=st.executeQuery("select * from reservation");
 while(rs.next())
 {
 h.add(rs.getString(1));
@@ -122,11 +131,11 @@ System.out.println("Connection failed:"+e);
 }
 public void itemStateChanged(ItemEvent e)
 {
-System.out.println((String)h.getSelectedItem());
+System.out.println(h.getSelectedItem());
 try
 {
 li.removeAll();
-ps=con.prepareStatement("select * from Reservation where PNR_No=?");
+ps=con.prepareStatement("select * from reservation where PNR_No=?");
 ps.setString(1,h.getSelectedItem());
 rs=ps.executeQuery();
 rs.next();
@@ -137,7 +146,7 @@ t4.setText(rs.getString(5));
 t5.setText(rs.getString(6));
 t6.setText(rs.getString(7));
 t7.setText(rs.getString(8));
-ps=con.prepareStatement("select * from Passenger where PNR_No=?");
+ps=con.prepareStatement("select * from passenger where PNR_No=?");
 ps.setString(1,h.getSelectedItem());
 rs=ps.executeQuery();
 while(rs.next())
@@ -178,7 +187,7 @@ f.setVisible(false);
 new Main();
 }
 }
-public static void main(String args[])
+public static void main(String[] args)
 {
 new Cancellation();
 }
