@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
+import java.math.BigInteger;
 class Reservation extends Connect implements ActionListener,FocusListener
 {
 JFrame f;
@@ -15,6 +16,7 @@ Statement st;
 ResultSet rs;
 String x;
 JLabel imgL;
+BigInteger pnrno;
 ImageIcon img;
 void disable()
 {
@@ -85,6 +87,8 @@ h.setBounds(150,140,100,30);
 h.add("AC");
 h.add("SL");
 h.add("B");
+h.add("D");
+h.add("H1");
 //b1=new JButton("Initiate");
 //b1.setBackground(Color.yellow);
 //b1.setBounds(50,270,100,30);
@@ -129,7 +133,11 @@ try
     rs=st.executeQuery("select * from pnr");
     rs.next();
     x=rs.getString(1);
-    t1.setText(String.valueOf(x));
+    pnrno=new BigInteger(x);
+    System.out.println(pnrno);
+    pnrno=pnrno.add(BigInteger.valueOf(1));
+    System.out.println(pnrno);
+    t1.setText(String.valueOf(pnrno));
 
 }
 catch(Exception e1)
@@ -183,8 +191,8 @@ ps.executeUpdate();
 
 //update PNR no.
 ps=con.prepareStatement("update pnr set PNR_No=? where PNR_No=?");
-ps.setString(1, String.valueOf((Integer.parseInt(x)+1)));
-ps.setString(2,x);
+ps.setString(1, String.valueOf(pnrno));
+ps.setString(2,String.valueOf(x));
 ps.executeUpdate();
 JOptionPane.showMessageDialog(null, "Record Saved");
 
