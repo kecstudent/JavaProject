@@ -65,7 +65,7 @@ i3.addActionListener(this);
 i4=new JMenuItem("Exit");
 i4.addActionListener(this);
 
-i5=new JMenuItem("About Us");
+i5=new JMenuItem("Contact Us");
 i5.addActionListener(this);
 
 m1=new JMenu("Booking");
