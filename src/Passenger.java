@@ -51,7 +51,7 @@ b1=new JButton("More");
 b1.setBackground(Color.yellow);
 b1.addActionListener(this);
 b1.setBounds(50,330,100,30);
-b2=new JButton("Save");
+b2=new JButton("Book");
 b2.setBackground(Color.yellow);
 b2.addActionListener(this);
 b2.setBounds(170,330,100,30);
@@ -182,7 +182,7 @@ ps.close();
 }
 st=con.createStatement();
 st.executeUpdate("delete from temppassenger");
-JOptionPane.showMessageDialog(null,"Record Saved");
+JOptionPane.showMessageDialog(null,"Ticket Booked Successfully");
 b2.setEnabled(false);
 b1.setEnabled(false);
 st.close();

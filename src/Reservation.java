@@ -194,10 +194,10 @@ ps.executeUpdate();
 
 //update PNR no.
 ps=con.prepareStatement("update pnr set PNR_No=? where PNR_No=?");
-ps.setString(1, String.valueOf(pnrno));
+ps.setString(1,String.valueOf(pnrno));
 ps.setString(2,String.valueOf(x));
 ps.executeUpdate();
-JOptionPane.showMessageDialog(null, "Record Saved");
+JOptionPane.showMessageDialog(null, "Now Enter Passenger Details");
 
 b1.setEnabled(true);
 b2.setEnabled(false);
@@ -205,7 +205,7 @@ f.setVisible(false);
 }
 catch(Exception e1)
 {
-System.out.println("Connection failed:"+e1);
+System.out.println("Connection failed 208 Res:"+e1);
 }
 try
 {
@@ -226,7 +226,7 @@ ps.executeUpdate();
 }
 catch(Exception e1)
 {
-System.out.println("Connection failed:"+e1);
+System.out.println("Connection failed 229 Res:"+e1);
 }
 }
 if(e.getSource()==b3)
