@@ -29,6 +29,7 @@ f.getContentPane().setBackground(Color.green);
 l1=new JLabel("PId");
 l1.setBounds(50,50,100,30);
 t1=new JTextField(10);
+t1.setEditable(false);
 t1.setBounds(170,50,100,30);
 l2=new JLabel("Name of Passenger");
 l2.setBounds(50,80,120,30);
@@ -93,7 +94,7 @@ f.getContentPane().add(c3);
 f.getContentPane().add(c4);
 f.getContentPane().add(c5);
 f.getContentPane().add(imgL);
-f.setSize(1300,1000);
+f.setSize(600,600);
 f.setVisible(true);
 }
 public void actionPerformed(ActionEvent e)
@@ -195,7 +196,7 @@ System.out.println("Line 191:"+e1);
 if(e.getSource()==b3)
 {
 f.setVisible(false);
-new Reservation();
+new Main();
 }
 }
 public static void main(String args[])

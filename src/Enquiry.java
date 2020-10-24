@@ -49,7 +49,7 @@ f.getContentPane().add(li);
 f.getContentPane().add(b1);
 f.getContentPane().add(b2);
 f.getContentPane().add(imgL);
-f.setSize(1300,1000);
+f.setSize(600,600);
 f.setVisible(true);
 }
 public void actionPerformed(ActionEvent e)

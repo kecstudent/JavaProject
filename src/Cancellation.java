@@ -109,7 +109,7 @@ f.getContentPane().add(t5);
 f.getContentPane().add(t6);
 f.getContentPane().add(t7);
 f.getContentPane().add(li);
-f.setSize(1300,1000);
+f.setSize(600,600);
 f.setVisible(true);
 start();
 }

@@ -6,6 +6,9 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+
+import static java.awt.event.KeyEvent.*;
+
 class Main implements ActionListener
 {
 JFrame f;
@@ -18,6 +21,7 @@ JMenuBar mb;
 JMenu m1,m2,m3;
 JMenuItem i1,i2,i3,i4,i5;
 String mail="contact@irctc.co.in";
+JMenuItem pbooking,ppnr,pcontact;
 
 Main()
 {
@@ -27,11 +31,29 @@ mailL.setCursor(new Cursor(Cursor.HAND_CURSOR));
 img=new ImageIcon(getClass().getResource("./images/indian-railways.jpg"));
 imgL=new JLabel(img);
 imgL.setBounds(0,0,700,600);
-f=new JFrame("Dashboard");
+f=new JFrame("IRCTC");
 f.getContentPane().setLayout(null);
 //f.getContentPane().setBackground(Color.white);
+    final JPopupMenu popupmenu = new JPopupMenu("Edit");
+     pbooking = new JMenuItem("Booking");
+     ppnr = new JMenuItem("PNR Enquiry");
+     pcontact = new JMenuItem("Contact");
+    popupmenu.add(pbooking); popupmenu.add(ppnr); popupmenu.add(pcontact);
+    pbooking.addActionListener(this);ppnr.addActionListener(this);pcontact.addActionListener(this);
+    f.addMouseListener(new MouseAdapter() {
+        public void mouseClicked(MouseEvent e) {
+            if(e.isPopupTrigger())
+                popupmenu.show(f , e.getX(), e.getY());
+        }
+        public void mouseReleased(MouseEvent e) {
+            if(e.isPopupTrigger())
+                popupmenu.show(f,e.getX(),e.getY());
+        }
 
-i1=new JMenuItem("Reservation Form");
+    });
+
+
+    i1=new JMenuItem("Reservation Form");
 i1.addActionListener(this);
 
 i2=new JMenuItem("PNR-enquiry");
@@ -58,10 +80,15 @@ mb.add(m1);mb.add(m2);mb.add(m3);
 
 f.setJMenuBar(mb);
 
-
+m1.setMnemonic('B');
+m2.setMnemonic('N');
+m3.setMnemonic('L');
 i1.setMnemonic('R');
+i1.setAccelerator(KeyStroke.getKeyStroke(VK_R, Event.CTRL_MASK | Event.SHIFT_MASK));
 i2.setMnemonic('P');
+i2.setAccelerator(KeyStroke.getKeyStroke(VK_P, Event.CTRL_MASK | Event.SHIFT_MASK));
 i3.setMnemonic('C');
+i3.setAccelerator(KeyStroke.getKeyStroke(VK_C, Event.CTRL_MASK | Event.SHIFT_MASK));
 i4.setMnemonic('E');
 i5.setMnemonic('A');
 
@@ -73,12 +100,12 @@ f.setVisible(true);
 }
 public void actionPerformed(ActionEvent e)
 {
-if(e.getSource()==i1)
+if(e.getSource()==i1 || e.getSource() == pbooking)
 {
 f.setVisible(false);
 r=new Reservation();
 }
-if(e.getSource()==i2)
+if(e.getSource()==i2 || e.getSource()==ppnr)
 {
 f.setVisible(false);
 q=new Enquiry();
@@ -93,7 +120,7 @@ if(e.getSource()==i4)
 f.setVisible(false);
 System.exit(0);
 }
-if(e.getSource()==i5)
+if(e.getSource()==i5 || e.getSource()==pcontact)
 {
     mailL.addMouseListener(new MouseAdapter() {
 

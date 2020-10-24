@@ -74,6 +74,7 @@ t2.addFocusListener(this);
 t2.setBounds(150,80,100,30);
 t3=new JTextField(10);
 t3.setBounds(150,110,100,30);
+t3.setEditable(false);
 t4=new JTextField(10);
 t4.setBounds(150,170,100,30);
 t5=new JTextField(10);
@@ -144,7 +145,7 @@ catch(Exception e1)
 {
     System.out.println("Connection failed:"+e1);
 }
-f.setSize(1300,1000);
+f.setSize(600,600);
 f.setVisible(true);
 
 }
@@ -154,12 +155,14 @@ if(t2.getText().length()!=0)
 {
 try
 {
-ps=con.prepareStatement("select Train_Name from Train where Train_No=?");
+ps=con.prepareStatement("select Train_Name,Arrival,Departure from Train where Train_No=?");
 ps.setString(1,t2.getText());
 rs=ps.executeQuery();
 if(rs.next())
 {
 t3.setText(rs.getString(1));
+t5.setText(rs.getString(2));
+t6.setText(rs.getString(3));
 }
 }
 catch(Exception e1)
